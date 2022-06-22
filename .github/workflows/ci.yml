@@ -24,6 +24,7 @@ jobs:
       uses: PaulHatch/semantic-version@v5.0.0-alpha2
       with:
         search_commit_body: true
+        format: "${major}.${minor}.${patch}+${increment}"
 
     - name: Print Version
       run: echo "Version is $VERSION"
