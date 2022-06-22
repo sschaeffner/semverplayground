@@ -26,7 +26,7 @@ jobs:
         search_commit_body: true
 
     - name: Print Version
-      run: echo $VERSION
+      run: echo "Version is $VERSION"
 
     - name: Check overriding
       run: |
