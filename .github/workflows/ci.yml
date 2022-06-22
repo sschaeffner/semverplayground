@@ -1,0 +1,42 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    name: Build & Publish
+
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+
+    permissions:
+      packages: write
+      contents: read
+
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+    - name: Git Semantic Version
+      uses: PaulHatch/semantic-version@v5.0.0-alpha2
+      with:
+        search_commit_body: true
+
+    - name: Print Version
+      run: echo $VERSION
+
+    - name: Check overriding
+      run: |
+        VERSION=latest
+        echo "Overridden version is $VERSION"
+
+    - name: Check overriding 2
+      run: |
+        VERSION=$FABX_VERSION
+        echo "Overridden version 2 is $VERSION"
+        echo "Overridden version 3 is $FABX_VERSION"
+      env:
+        FABX_VERSION: $VERSION
