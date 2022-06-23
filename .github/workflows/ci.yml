@@ -33,11 +33,11 @@ jobs:
     - name: Print Version 2
       run: echo "Version is $VERSION"
       env:
-        VERSION=${{ steps.version.outputs.version }}
+        VERSION: ${{ steps.version.outputs.version }}
 
     - name: Check overriding
       run: |
         VERSION=latest
         echo "Overridden version is $VERSION"
       env:
-        VERSION=${{ steps.version.outputs.version }}
+        VERSION: ${{ steps.version.outputs.version }}
