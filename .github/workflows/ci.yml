@@ -25,7 +25,8 @@ jobs:
       uses: PaulHatch/semantic-version@v5.0.0-alpha2
       with:
         search_commit_body: true
-        version_format: "${major}.${minor}.${patch}+${increment}"
+        bump_each_commit: true
+        version_format: "${major}.${minor}.${patch}"
 
     - name: Print Version
       run: echo "Version is ${{ steps.version.outputs.version }}"
