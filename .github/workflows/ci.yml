@@ -21,23 +21,23 @@ jobs:
         fetch-depth: 0
 
     - name: Git Semantic Version
+      id: version
       uses: PaulHatch/semantic-version@v5.0.0-alpha2
       with:
         search_commit_body: true
         version_format: "${major}.${minor}.${patch}+${increment}"
 
     - name: Print Version
-      run: echo "Version is $formattedVersion"
+      run: echo "Version is ${{ steps.version.outputs.version }}"
+
+    - name: Print Version 2
+      run: echo "Version is $VERSION"
+      env:
+        VERSION=${{ steps.version.outputs.version }}
 
     - name: Check overriding
       run: |
         VERSION=latest
         echo "Overridden version is $VERSION"
-
-    - name: Check overriding 2
-      run: |
-        VERSION=$FABX_VERSION
-        echo "Overridden version 2 is $VERSION"
-        echo "Overridden version 3 is $FABX_VERSION"
       env:
-        FABX_VERSION: $VERSION
+        VERSION=${{ steps.version.outputs.version }}
